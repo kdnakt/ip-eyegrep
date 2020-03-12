@@ -48,21 +48,25 @@ const Question: React.FC<{
   q, toRight, setRemaining
 }) => {
   const [show, setShow] = useState(true);
+  const [wrong, setWrong] = useState(false);
   return (
     <>
       <span
-        onClick={(e) => {
+        onClick={() => {
+          if (wrong) return;
           if (!q.valid) {
             alert('せいかい！');
             setShow(false);
             setRemaining(prev => prev - 1);
           } else {
             alert('はずれ！');
+            setWrong(true);
           }
         }}
         style={{
           marginLeft: toRight ? '60%' : '20%',
           display: show ? 'inline' : 'none',
+          textDecoration: wrong ? 'line-through' : 'none',
         }}
       >
         {q.ip}
