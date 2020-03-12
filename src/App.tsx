@@ -40,48 +40,6 @@ const shuffle = ([...array]: Target[]) => {
 }
 const questions = shuffle(targets);
 
-// function start() {
-//   const t = shuffle(targets)
-//   let rem = t.length
-//   let toRight = false
-//   const question = document.getElementById("question");
-//   t.forEach(e => {
-//     const q = document.createElement('span')
-//     q.innerText = e.ip
-//     q.style.marginLeft = toRight ? '60%' : '30%'
-//     toRight = !toRight
-//     question.append(q)
-//     q.addEventListener('click', () => {
-//       if (!e.valid) {
-//       alert('正解！')
-//       q.remove()
-      
-//       const r = document.getElementById('rem')
-//       const next = r.innerText -1
-//       if (next == 0) {
-//         alert('クリアです！おめでとう🎉')
-//         start()
-//       } else {
-//         r.innerText = next
-//       }
-//       } else {alert('はずれ！')}
-//     }) 
-//     if (e.valid) rem--
-    
-//     question.append(
-//       document.createElement('br'))
-//   })
-//   document.getElementById('rem').innerText = rem
-// }
-// function reset() {
-//   const question = document.getElementById("question");
-//   question.remove()
-//   const newQ =document.createElement('div')
-//   newQ.id = 'question'
-//   document.body.append(newQ)
-//   start()
-// }
-
 const Question: React.FC<{
   q: Target,
   toRight: boolean,
@@ -103,7 +61,7 @@ const Question: React.FC<{
           }
         }}
         style={{
-          marginLeft: toRight ? '60%' : '30%',
+          marginLeft: toRight ? '60%' : '20%',
           display: show ? 'inline' : 'none',
         }}
       >
@@ -143,12 +101,13 @@ function App() {
   return (
     <div>
       <header>
-        <h1>IPアドレス<br/>まちがいさがし</h1>
-        <h5>ただしくないIPアドレスを<br />クリックしてやっつけよう！</h5>
+        <h1>IPアドレスまちがいさがし</h1>
+        <h5>v1.0.0</h5>
+        <h5>ただしくないIPアドレスをクリックしてやっつけよう！</h5>
         <h5>あと{remaining}こ</h5>
+        <div id="btn" onClick={reset}>さいしょから</div>
       </header>
       <body>
-        <div id="btn" onClick={reset}>さいしょから</div>
         <div id="question">
           {useQuestions(setRemaining)}
         </div>
