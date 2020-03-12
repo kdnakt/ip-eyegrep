@@ -102,7 +102,6 @@ function App() {
     <div>
       <header>
         <h1>IPアドレスまちがいさがし</h1>
-        <h5>v1.0.0</h5>
         <h5>ただしくないIPアドレスをクリックしてやっつけよう！</h5>
         <h5>あと{remaining}こ</h5>
         <div id="btn" onClick={reset}>さいしょから</div>
@@ -114,6 +113,7 @@ function App() {
       </body>
       <footer>
         <h6>
+          <span>v1.0.0</span>
           <a href="https://twitter.com/kdnakt">©︎ kdnakt</a>
         </h6>
       </footer>

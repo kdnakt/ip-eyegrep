@@ -33,6 +33,10 @@ h6 {
     text-align: center;
 }
 
+h6>span {
+    margin: 0 8px;
+}
+
 h6>a {
     bottom: 0;
     text-decoration: none;
