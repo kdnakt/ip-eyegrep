@@ -1,0 +1,30 @@
+#btn {
+    width: 80px;
+    height: 80px;
+    background: red;
+    margin: -150px 30px auto auto;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 80px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+    box-shadow: 0 10px 0 black;
+    user-select: none;
+    float: right;
+}
+
+#btn:hover {
+    opacity: 0.8;
+}
+
+#btn:active {
+    box-shadow: 0 5px 0 black;
+    margin-top: 6px;
+}
+
+#question span:hover {
+    border: 1px solid red;
+    cursor: pointer;
+}
