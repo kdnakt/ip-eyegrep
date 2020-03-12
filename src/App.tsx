@@ -153,6 +153,11 @@ function App() {
           {useQuestions(setRemaining)}
         </div>
       </body>
+      <footer>
+        <h6>
+          <a href="https://twitter.com/kdnakt">©︎ kdnakt</a>
+        </h6>
+      </footer>
     </div>
   );
 }
