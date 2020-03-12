@@ -21,7 +21,7 @@
 
 #btn:active {
     box-shadow: 0 5px 0 black;
-    margin-top: 6px;
+    margin-top: -144px;
 }
 
 #question span:hover {
