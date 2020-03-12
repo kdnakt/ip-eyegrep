@@ -28,3 +28,8 @@
     border: 1px solid red;
     cursor: pointer;
 }
+
+h1,
+h5 {
+    text-align: center;
+}

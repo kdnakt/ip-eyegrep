@@ -5,9 +5,9 @@ function App() {
   return (
     <div>
       <header>
-        <h1 style={{textAlign: 'center'}}>IPアドレス<br/>まちがいさがし</h1>
-        <h5 style={{textAlign: 'center'}}>ただしくないIPアドレスを<br />クリックしてやっつけよう！</h5>
-        <h5 style={{textAlign: 'center'}}>あと<span id="rem">？</span>こ</h5>
+        <h1>IPアドレス<br/>まちがいさがし</h1>
+        <h5>ただしくないIPアドレスを<br />クリックしてやっつけよう！</h5>
+        <h5>あと<span id="rem">？</span>こ</h5>
       </header>
       <body>
         <div id="btn">さいしょから</div>
