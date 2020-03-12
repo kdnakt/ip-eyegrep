@@ -101,7 +101,7 @@ function App() {
   return (
     <div>
       <header>
-        <h1>IPアドレスまちがいさがし</h1>
+        <h2>IPアドレスまちがいさがし</h2>
         <h5>ただしくないIPアドレスをクリックしてやっつけよう！</h5>
         <h5>あと{remaining}こ</h5>
         <div id="btn" onClick={reset}>さいしょから</div>
