@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './my.css'
 
 type Target = {
@@ -47,26 +47,28 @@ const Question: React.FC<{
 }> = ({
   q, toRight, setRemaining
 }) => {
-  const [show, setShow] = useState(true);
-  const [wrong, setWrong] = useState(false);
+  const [result, setResult] = useState('');
   return (
     <>
+      <span 
+        style={{
+          marginLeft: toRight ? '60%' : '20%'
+        }}
+      >{result}</span>
       <span
         onClick={() => {
-          if (wrong) return;
+          if (result) return;
           if (!q.valid) {
-            alert('せいかい！');
-            setShow(false);
+            //alert('せいかい！');
+            setResult('○');
             setRemaining(prev => prev - 1);
           } else {
-            alert('はずれ！');
-            setWrong(true);
+            //alert('はずれ！');
+            setResult('×');
           }
         }}
         style={{
-          marginLeft: toRight ? '60%' : '20%',
-          display: show ? 'inline' : 'none',
-          textDecoration: wrong ? 'line-through' : 'none',
+          textDecoration: result ? 'line-through' : 'none',
         }}
       >
         {q.ip}
@@ -77,9 +79,11 @@ const Question: React.FC<{
 }
 
 const useQuestions = (
+  started: boolean,
   setRemaining: (func: (n: number) => number) => void,
 ) => {
   const result: JSX.Element[] = [];
+  if (!started) return result;
   for (let i = 0, len = questions.length; i < len; i++) {
     result.push(
       <Question
@@ -96,9 +100,19 @@ const reset = () => {
 }
 
 function App() {
+  const [started, setStarted] = useState(false);
   const [remaining, setRemaining] = useState(invalidCount);
+  //let [timer, setTimer] = useState(0);
+  const [passedSec, setPassedSec] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => {
+      setPassedSec(prev => prev + 1);
+    }, 1000);
+    return () => clearInterval(id);
+  });
   if (remaining === 0) {
-    alert('クリアです！おめでとう🎉');
+    alert('クリアです！おめでとう🎉' + `\n\nきろく${passedSec}びょう`);
+    //window.clearInterval(timer);
     reset();
   }
 
@@ -107,19 +121,41 @@ function App() {
       <header>
         <h2>IPアドレスまちがいさがし</h2>
         <h5>ただしくないIPアドレスをクリックしてやっつけよう！</h5>
-        <h5>あと{remaining}こ</h5>
-        <div id="btn" onClick={reset}>さいしょから</div>
+        <h6>なんびょうでクリアできるかな？</h6>
+        {!started ? (
+          <>
+            <div id="start-btn" onClick={() => {
+              setStarted(true);
+              setPassedSec(0);
+            }}>スタート</div>  
+          </>
+        ) : (
+          <>
+            <h5>あと{remaining}こ</h5>
+            <h5>きろく：{passedSec}びょう</h5>
+            <div id="btn" onClick={reset}>さいしょから</div>
+          </>
+        )}
       </header>
       <body>
         <div id="question">
-          {useQuestions(setRemaining)}
+          {useQuestions(started, setRemaining)}
         </div>
       </body>
       <footer>
         <h6>
-          <span>v1.0.0</span>
+          <span>v1.1.0</span>
           <a href="https://twitter.com/kdnakt">©︎ kdnakt</a>
         </h6>
+        {started ? undefined : (
+          <h6>
+            <span>2020/03/13 v1.0.0</span>
+            <br />
+            <span>2020/03/14 v1.1.0</span>
+            <br />
+            <span>ストップウォッチ機能を追加</span>
+          </h6>
+        )}
       </footer>
     </div>
   );

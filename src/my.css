@@ -14,7 +14,24 @@
     margin: 0 auto;
 }
 
-#btn:hover {
+#start-btn {
+    width: 90px;
+    height: 80px;
+    background: green;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 80px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 10px 0 black;
+    user-select: none;
+    margin: 0 auto;
+}
+
+#btn:hover,
+#start-btn:hover {
     opacity: 0.8;
 }
 
@@ -41,4 +58,9 @@ h6>span {
 h6>a {
     bottom: 0;
     text-decoration: none;
+}
+
+footer>ul {
+    font-size: small;
+    text-align: center;
 }
