@@ -102,7 +102,6 @@ const reset = () => {
 function App() {
   const [started, setStarted] = useState(false);
   const [remaining, setRemaining] = useState(invalidCount);
-  //let [timer, setTimer] = useState(0);
   const [passedSec, setPassedSec] = useState(0);
   useEffect(() => {
     const id = setInterval(() => {
@@ -112,7 +111,6 @@ function App() {
   });
   if (remaining === 0) {
     alert('クリアです！おめでとう🎉' + `\n\nきろく${passedSec}びょう`);
-    //window.clearInterval(timer);
     reset();
   }
 
