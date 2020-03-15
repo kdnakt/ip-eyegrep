@@ -9,15 +9,13 @@
     font-weight: bold;
     font-size: 12px;
     cursor: pointer;
-    box-shadow: 0 10px 0 black;
     user-select: none;
     margin: 0 auto;
 }
 
-#start-btn {
-    width: 90px;
+.start-btn {
+    width: 80px;
     height: 80px;
-    background: green;
     border-radius: 50%;
     text-align: center;
     line-height: 80px;
@@ -25,13 +23,20 @@
     font-weight: bold;
     font-size: 14px;
     cursor: pointer;
-    box-shadow: 0 10px 0 black;
     user-select: none;
     margin: 0 auto;
 }
 
+.start-btn-normal {
+    background: cornflowerblue;
+}
+
+.start-btn-easy {
+    background: green;
+}
+
 #btn:hover,
-#start-btn:hover {
+.start-btn:hover {
     opacity: 0.8;
 }
 

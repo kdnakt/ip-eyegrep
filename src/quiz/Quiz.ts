@@ -8,6 +8,16 @@ export type Level = "easy"
   | "normal"
   | "hard";
 
+const easyTargets: Target[] = [
+  {"ip":"10.0.0.0","valid":true},
+  {"ip":"10.0.0,1","valid":false},
+  {"ip":"10.0.0.2","valid":true},
+  {"ip":"10.0.0.3","valid":true},
+  {"ip":"10.０.0.4","valid":false},
+  {"ip":"10.0.0.5","valid":true},
+  {"ip":"10.0.0.6","valid":true},
+];
+
 const normalTargets: Target[] = [
   {"ip":"10.0.0.0","valid":true},
   {"ip":"10.20.30.40","valid":true},
@@ -38,10 +48,26 @@ const shuffle = ([...array]: Target[]) => {
   return array;
 }
 
-const normalQuestions = shuffle(normalTargets);
+const countInvalid = (targets: Target[]) => targets.filter(o => !o.valid).length;
+
+type Questions = {
+  questions: Target[],
+  invalidCount: number,
+};
+
+const normalQuestions: Questions = {
+  questions: shuffle(normalTargets),
+  invalidCount: countInvalid(normalTargets),
+};
+const easyQuestions: Questions = {
+  questions: shuffle(easyTargets),
+  invalidCount: countInvalid(easyTargets),
+};
 
 export const selectQuestions = (level: Level) => {
   switch (level) {
+    case "easy":
+      return easyQuestions;
     case "normal":
       return normalQuestions;
     default:

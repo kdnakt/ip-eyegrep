@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import './my.css'
 import Questions from './components/Questions';
-import useQuiz from './quiz/useQuiz';
+import { Level, selectQuestions } from './quiz/Quiz';
 
 const reset = () => {
   document.location.reload()
 }
 
 function App() {
-  const {invalidCount, questions} = useQuiz("normal");
+  const [level, setLevel] = useState("normal" as Level);
+  const questions = selectQuestions(level);
   const [started, setStarted] = useState(false);
-  const [remaining, setRemaining] = useState(invalidCount);
   const [passedSec, setPassedSec] = useState(0);
   useEffect(() => {
     const id = setInterval(() => {
@@ -18,24 +18,30 @@ function App() {
     }, 1000);
     return () => clearInterval(id);
   });
+  const [remaining, setRemaining] = useState(questions.invalidCount);
   if (remaining === 0) {
     alert(`クリアです！おめでとう🎉\n\nきろく${passedSec}びょう`);
     reset();
   }
 
+  const start = (level: Level) => {
+    setLevel(level);
+    setStarted(true);
+    setRemaining(questions.invalidCount);
+    setPassedSec(0);
+  };
+
   return (
-    <div>
+    <>
       <header>
         <h2>IPアドレスまちがいさがし</h2>
         <h5>ただしくないIPアドレスをクリックしてやっつけよう！</h5>
         <h6>なんびょうでクリアできるかな？</h6>
         {!started ? (
-          <>
-            <div id="start-btn" onClick={() => {
-              setStarted(true);
-              setPassedSec(0);
-            }}>スタート</div>  
-          </>
+          <div className="start-btns">
+            <div className="start-btn start-btn-easy" onClick={() => start("easy")}>かんたん</div>  
+            <div className="start-btn start-btn-normal" onClick={() => start("normal")}>ふつう</div>  
+          </div>
         ) : (
           <>
             <h5>あと{remaining}こ</h5>
@@ -44,10 +50,10 @@ function App() {
           </>
         )}
       </header>
-      <body>
+      <body style={{clear:"both"}}>
         <div id="question">
           <Questions started={started}
-            questions={questions}
+            questions={questions.questions}
             setRemaining={setRemaining}
           />
         </div>
@@ -67,7 +73,7 @@ function App() {
           </h6>
         )}
       </footer>
-    </div>
+    </>
   );
 }
 

@@ -16,7 +16,7 @@ const Question: React.FC<{
 }) => {
   const [result, setResult] = useState('');
   return (
-    <>
+    <div>
       <span 
         style={{
           marginLeft: toRight ? '60%' : '20%'
@@ -39,7 +39,7 @@ const Question: React.FC<{
         {q.ip}
       </span>
       <br />
-    </>
+    </div>
   );
 }
 
@@ -53,6 +53,7 @@ const Questions: FC<QuestionsProps> = ({
     for (let i = 0, len = questions.length; i < len; i++) {
       result.push(
         <Question
+          key={i}
           q={questions[i]} toRight={i % 2 === 0}
           setRemaining={setRemaining}
         />
