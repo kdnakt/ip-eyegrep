@@ -41,6 +41,49 @@ const normalTargets: Target[] = [
   {"ip":"10.0.1,2","valid":false}
 ];
 
+const hardTargets: Target[] = [
+  {"ip":"10.0.0.0","valid":true},
+  {"ip":"10.0.0.1","valid":true},
+  {"ip":"10.20.30.40","valid":true},
+  {"ip":"10.20.30.41","valid":true},
+  {"ip":"10.120.3.243","valid":true},
+  {"ip":"10.120.3.244","valid":true},
+  {"ip":"1o.202.56.139","valid":false},
+  {"ip":"10.20.56.139","valid":true},
+  {"ip":"192.168.34.56","valid":true},
+  {"ip":"192.168.34.57","valid":true},
+  {"ip":"192.168.45.67","valid":true},
+  {"ip":"192.1b8.45.67","valid":false},
+  {"ip":"172.16.255.255","valid":true},
+  {"ip":"172.16.254.255","valid":true},
+  {"ip":"172.17.255.254","valid":true},
+  {"ip":"172.17.254.254","valid":true},
+  {"ip":"172.18.254.255","valid":true},
+  {"ip":"172.18.254.254","valid":true},
+  {"ip":"172.19.255.255","valid":true},
+  {"ip":"172.|9.255.255","valid":false},
+  {"ip":"172.20.255.255","valid":true},
+  {"ip":"172.20.254.25S","valid":false},
+  {"ip":"172.21,255.255","valid":false},
+  {"ip":"172.21.255,255","valid":false},
+  {"ip":"192.168.0.255","valid":true},
+  {"ip":"192.168.0.254","valid":true},
+  {"ip":"192.168.1O0.255","valid":false},
+  {"ip":"192.168.100.255.","valid":false},
+  {"ip":"192.168.00.255","valid":false},
+  {"ip":"192.168.0.I","valid":false},
+  {"ip":"10.200.300.400","valid":false},
+  {"ip":"10.200.30.20l","valid":false},
+  {"ip":"192.168.3B.48","valid":false},
+  {"ip":"192.168.38.4&","valid":false},
+  {"ip":"10.256.255.255","valid":false},
+  {"ip":"10.255.265.255","valid":false},
+  {"ip":"192.l68.0.255","valid":false},
+  {"ip":"192.168.0.355","valid":false},
+  {"ip":"10.0.1,2","valid":false},
+  {"ip":"10,2.3.4","valid":false}
+];
+
 const shuffle = ([...array]: Target[]) => {
   for (let i = array.length - 1; i >= 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));     [array[i], array[j]] = [array[j], array[i]];
@@ -63,6 +106,10 @@ const easyQuestions: Questions = {
   questions: shuffle(easyTargets),
   invalidCount: countInvalid(easyTargets),
 };
+const hardQuestions: Questions = {
+  questions: shuffle(hardTargets),
+  invalidCount: countInvalid(hardTargets),
+};
 
 export const selectQuestions = (level: Level) => {
   switch (level) {
@@ -70,6 +117,8 @@ export const selectQuestions = (level: Level) => {
       return easyQuestions;
     case "normal":
       return normalQuestions;
+    case "hard":
+      return hardQuestions;
     default:
       return normalQuestions;
   }

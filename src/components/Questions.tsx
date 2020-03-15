@@ -1,25 +1,31 @@
 import React, {FC, useState} from 'react';
-import { Target } from '../quiz/Quiz';
+import { Target, Level } from '../quiz/Quiz';
 
 type QuestionsProps = {
   started: boolean,
+  level: Level,
   questions: Target[],
   setRemaining: (func: (n: number) => number) => void,
 };
 
-const Question: React.FC<{
+type QuestionProps = {
   q: Target,
-  toRight: boolean,
+  level: Level,
+  index: number,
   setRemaining: (func: (n: number) => number) => void,
-}> = ({
-  q, toRight, setRemaining
+};
+
+const Question: React.FC<QuestionProps> = ({
+  q, level, index, setRemaining
 }) => {
   const [result, setResult] = useState('');
+  const isHard = "hard" === level;
+  const toRight = index % 2 === 0;
   return (
-    <div>
+    <>
       <span 
         style={{
-          marginLeft: toRight ? '60%' : '20%'
+          marginLeft: toRight && !isHard ? '60%' : '20%'
         }}
       >{result}</span>
       <span
@@ -38,13 +44,14 @@ const Question: React.FC<{
       >
         {q.ip}
       </span>
-      <br />
-    </div>
+      {!isHard ? <br /> : toRight ? <br /> : undefined}
+    </>
   );
 }
 
 const Questions: FC<QuestionsProps> = ({
   started,
+  level,
   questions,
   setRemaining,
 }) => {
@@ -54,7 +61,8 @@ const Questions: FC<QuestionsProps> = ({
       result.push(
         <Question
           key={i}
-          q={questions[i]} toRight={i % 2 === 0}
+          level={level}
+          q={questions[i]} index={i}
           setRemaining={setRemaining}
         />
       );

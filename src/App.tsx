@@ -41,6 +41,7 @@ function App() {
           <div className="start-btns">
             <div className="start-btn start-btn-easy" onClick={() => start("easy")}>かんたん</div>  
             <div className="start-btn start-btn-normal" onClick={() => start("normal")}>ふつう</div>  
+            <div className="start-btn start-btn-hard" onClick={() => start("hard")}>むずかしい</div>  
           </div>
         ) : (
           <>
@@ -53,6 +54,7 @@ function App() {
       <div style={{clear:"both"}}>
         <div id="question">
           <Questions started={started}
+            level={level}
             questions={questions.questions}
             setRemaining={setRemaining}
           />

@@ -35,6 +35,10 @@
     background: green;
 }
 
+.start-btn-hard {
+    background: orangered;
+}
+
 #btn:hover,
 .start-btn:hover {
     opacity: 0.8;
@@ -45,7 +49,7 @@
 }
 
 #question span:hover {
-    border: 1px solid red;
+    border: 1px solid orangered;
     cursor: pointer;
 }
 
