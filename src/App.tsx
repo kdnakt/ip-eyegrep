@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './my.css'
-
-type Target = {
-  ip: string;
-  valid: boolean;
-};
+import { Target } from './quiz/Target';
+import Questions from './components/Questions';
 
 const targets: Target[] = [
   {"ip":"10.0.0.0","valid":true},
@@ -40,61 +37,6 @@ const shuffle = ([...array]: Target[]) => {
 }
 const questions = shuffle(targets);
 
-const Question: React.FC<{
-  q: Target,
-  toRight: boolean,
-  setRemaining: (func: (n: number) => number) => void,
-}> = ({
-  q, toRight, setRemaining
-}) => {
-  const [result, setResult] = useState('');
-  return (
-    <>
-      <span 
-        style={{
-          marginLeft: toRight ? '60%' : '20%'
-        }}
-      >{result}</span>
-      <span
-        onClick={() => {
-          if (result) return;
-          if (!q.valid) {
-            //alert('せいかい！');
-            setResult('○');
-            setRemaining(prev => prev - 1);
-          } else {
-            //alert('はずれ！');
-            setResult('×');
-          }
-        }}
-        style={{
-          textDecoration: result ? 'line-through' : 'none',
-        }}
-      >
-        {q.ip}
-      </span>
-      <br />
-    </>
-  );
-}
-
-const useQuestions = (
-  started: boolean,
-  setRemaining: (func: (n: number) => number) => void,
-) => {
-  const result: JSX.Element[] = [];
-  if (!started) return result;
-  for (let i = 0, len = questions.length; i < len; i++) {
-    result.push(
-      <Question
-        q={questions[i]} toRight={i % 2 === 0}
-        setRemaining={setRemaining}
-      />
-    );
-  }
-  return result;
-}
-
 const reset = () => {
   document.location.reload()
 }
@@ -110,7 +52,7 @@ function App() {
     return () => clearInterval(id);
   });
   if (remaining === 0) {
-    alert('クリアです！おめでとう🎉' + `\n\nきろく${passedSec}びょう`);
+    alert(`クリアです！おめでとう🎉\n\nきろく${passedSec}びょう`);
     reset();
   }
 
@@ -137,7 +79,10 @@ function App() {
       </header>
       <body>
         <div id="question">
-          {useQuestions(started, setRemaining)}
+          <Questions started={started}
+            questions={questions}
+            setRemaining={setRemaining}
+          />
         </div>
       </body>
       <footer>
