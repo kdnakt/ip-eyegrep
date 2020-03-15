@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/ip-eyegrep/static/css/main.c45dbf18.chunk.css",
-    "main.js": "/ip-eyegrep/static/js/main.d7be8689.chunk.js",
-    "main.js.map": "/ip-eyegrep/static/js/main.d7be8689.chunk.js.map",
+    "main.css": "/ip-eyegrep/static/css/main.6ab608a5.chunk.css",
+    "main.js": "/ip-eyegrep/static/js/main.192b5afe.chunk.js",
+    "main.js.map": "/ip-eyegrep/static/js/main.192b5afe.chunk.js.map",
     "runtime-main.js": "/ip-eyegrep/static/js/runtime-main.c4c1330f.js",
     "runtime-main.js.map": "/ip-eyegrep/static/js/runtime-main.c4c1330f.js.map",
     "static/js/2.c7a5c12f.chunk.js": "/ip-eyegrep/static/js/2.c7a5c12f.chunk.js",
     "static/js/2.c7a5c12f.chunk.js.map": "/ip-eyegrep/static/js/2.c7a5c12f.chunk.js.map",
     "index.html": "/ip-eyegrep/index.html",
-    "precache-manifest.228fe2d13f2c8b18d34493746b156bbb.js": "/ip-eyegrep/precache-manifest.228fe2d13f2c8b18d34493746b156bbb.js",
+    "precache-manifest.e0a3c80df7674c9036d5ab55e4f50b16.js": "/ip-eyegrep/precache-manifest.e0a3c80df7674c9036d5ab55e4f50b16.js",
     "service-worker.js": "/ip-eyegrep/service-worker.js",
-    "static/css/main.c45dbf18.chunk.css.map": "/ip-eyegrep/static/css/main.c45dbf18.chunk.css.map",
+    "static/css/main.6ab608a5.chunk.css.map": "/ip-eyegrep/static/css/main.6ab608a5.chunk.css.map",
     "static/js/2.c7a5c12f.chunk.js.LICENSE.txt": "/ip-eyegrep/static/js/2.c7a5c12f.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.c4c1330f.js",
     "static/js/2.c7a5c12f.chunk.js",
-    "static/css/main.c45dbf18.chunk.css",
-    "static/js/main.d7be8689.chunk.js"
+    "static/css/main.6ab608a5.chunk.css",
+    "static/js/main.192b5afe.chunk.js"
   ]
 }

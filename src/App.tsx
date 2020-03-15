@@ -27,13 +27,13 @@ function App() {
   const start = (level: Level) => {
     setLevel(level);
     setStarted(true);
-    setRemaining(questions.invalidCount);
+    setRemaining(selectQuestions(level).invalidCount);
     setPassedSec(0);
   };
 
   return (
     <>
-      <header>
+      <div>
         <h2>IPアドレスまちがいさがし</h2>
         <h5>ただしくないIPアドレスをクリックしてやっつけよう！</h5>
         <h6>なんびょうでクリアできるかな？</h6>
@@ -49,30 +49,34 @@ function App() {
             <div id="btn" onClick={reset}>さいしょから</div>
           </>
         )}
-      </header>
-      <body style={{clear:"both"}}>
+      </div>
+      <div style={{clear:"both"}}>
         <div id="question">
           <Questions started={started}
             questions={questions.questions}
             setRemaining={setRemaining}
           />
         </div>
-      </body>
-      <footer>
+      </div>
+      <div>
         <h6>
-          <span>v1.1.0</span>
+          <span>v1.2.0</span>
           <a href="https://twitter.com/kdnakt">©︎ kdnakt</a>
         </h6>
         {started ? undefined : (
           <h6>
             <span>2020/03/13 v1.0.0</span>
-            <br />
+            <br /><br />
             <span>2020/03/14 v1.1.0</span>
             <br />
-            <span>ストップウォッチ機能を追加</span>
+            <span>ストップウォッチをついか</span>
+            <br /><br />
+            <span>2020/03/15 v1.2.0</span>
+            <br />
+            <span>かんたんモードをついか</span>
           </h6>
         )}
-      </footer>
+      </div>
     </>
   );
 }
