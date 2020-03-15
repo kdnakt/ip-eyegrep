@@ -24,7 +24,7 @@
     font-size: 14px;
     cursor: pointer;
     user-select: none;
-    margin: 0 auto;
+    margin: 4px auto;
 }
 
 .start-btn-normal {
@@ -46,6 +46,7 @@
 
 #question {
     margin: 40px 0;
+    text-align: center;
 }
 
 #question span:hover {

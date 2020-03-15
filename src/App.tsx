@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './my.css'
 import Questions from './components/Questions';
-import { Level, selectQuestions } from './quiz/Quiz';
+import { Level, selectQuestions, selectLevelLabel } from './quiz/Quiz';
 
 const reset = () => {
   document.location.reload()
@@ -20,7 +20,7 @@ function App() {
   });
   const [remaining, setRemaining] = useState(questions.invalidCount);
   if (remaining === 0) {
-    alert(`クリアです！おめでとう🎉\n\nきろく${passedSec}びょう`);
+    alert(`クリアです！おめでとう🎉\n\nモード：${selectLevelLabel(level)}\nきろく：${passedSec}びょう`);
     reset();
   }
 
@@ -52,7 +52,7 @@ function App() {
         )}
       </div>
       <div style={{clear:"both"}}>
-        <div id="question">
+        <div>
           <Questions started={started}
             level={level}
             questions={questions.questions}
@@ -62,7 +62,7 @@ function App() {
       </div>
       <div>
         <h6>
-          <span>v1.2.0</span>
+          <span>v1.3.0</span>
           <a href="https://twitter.com/kdnakt">©︎ kdnakt</a>
         </h6>
         {started ? undefined : (
@@ -76,6 +76,10 @@ function App() {
             <span>2020/03/15 v1.2.0</span>
             <br />
             <span>かんたんモードをついか</span>
+            <br /><br />
+            <span>2020/03/16 v1.3.0</span>
+            <br />
+            <span>むずかしいモードをついか</span>
           </h6>
         )}
       </div>

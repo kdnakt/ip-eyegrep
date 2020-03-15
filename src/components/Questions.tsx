@@ -20,12 +20,37 @@ const Question: React.FC<QuestionProps> = ({
 }) => {
   const [result, setResult] = useState('');
   const isHard = "hard" === level;
-  const toRight = index % 2 === 0;
+  if (isHard) {
+    return (
+      <>
+        <span style={{marginLeft: index % 3 !== 0 ? '4px' : '3%'}}>
+          {result}
+        </span>
+        <span
+          onClick={() => {
+            if (result) return;
+            if (!q.valid) {
+              setResult('○');
+              setRemaining(prev => prev - 1);
+            } else {
+              setResult('×');
+            }
+          }}
+          style={{
+            textDecoration: result ? 'line-through' : 'none',
+          }}
+        >
+          {q.ip}
+        </span>
+        {index % 3 === 2 ? <br /> : undefined}
+      </>
+    );
+  }
   return (
     <>
       <span 
         style={{
-          marginLeft: toRight && !isHard ? '60%' : '20%'
+          marginLeft: index % 2 !== 0 ? '40%' : '-25%'
         }}
       >{result}</span>
       <span
@@ -44,7 +69,7 @@ const Question: React.FC<QuestionProps> = ({
       >
         {q.ip}
       </span>
-      {!isHard ? <br /> : toRight ? <br /> : undefined}
+      <br />
     </>
   );
 }
