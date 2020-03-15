@@ -1,5 +1,5 @@
 import React, {FC, useState} from 'react';
-import { Target } from '../quiz/Target';
+import { Target } from '../quiz/Quiz';
 
 type QuestionsProps = {
   started: boolean,
