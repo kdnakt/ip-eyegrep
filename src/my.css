@@ -13,6 +13,26 @@
     margin: 0 auto;
 }
 
+#twitter-btn {
+    width: 90px;
+    height: 40px;
+    background: #1DA1F2;
+    border-radius: 30%;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+    user-select: none;
+    margin: 4px auto;
+}
+
+#twitter-btn>a {
+    color: #fff;
+    text-decoration: none;
+}
+
 .start-btn {
     width: 80px;
     height: 80px;

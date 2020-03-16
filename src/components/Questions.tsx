@@ -1,24 +1,25 @@
 import React, {FC, useState} from 'react';
 import { Target, Level } from '../quiz/Quiz';
 
-type QuestionsProps = {
-  started: boolean,
+type QuestionBaseProps = {
   level: Level,
-  questions: Target[],
+  resultSec: number,
   setRemaining: (func: (n: number) => number) => void,
   setLife: (func: (n: number) => number) => void,
 };
 
-type QuestionProps = {
+type QuestionsProps = QuestionBaseProps & {
+  started: boolean,
+  questions: Target[],
+};
+
+type QuestionProps = QuestionBaseProps & {
   q: Target,
-  level: Level,
   index: number,
-  setRemaining: (func: (n: number) => number) => void,
-  setLife: (func: (n: number) => number) => void,
 };
 
 const Question: React.FC<QuestionProps> = ({
-  q, level, index, setRemaining, setLife,
+  q, level, index, setRemaining, setLife, resultSec,
 }) => {
   const [result, setResult] = useState('');
   const isHard = "hard" === level;
@@ -30,7 +31,7 @@ const Question: React.FC<QuestionProps> = ({
         </span>
         <span
           onClick={() => {
-            if (result) return;
+            if (result || resultSec) return;
             if (!q.valid) {
               setResult('○');
               setRemaining(prev => prev - 1);
@@ -58,7 +59,7 @@ const Question: React.FC<QuestionProps> = ({
       >{result}</span>
       <span
         onClick={() => {
-          if (result) return;
+          if (result || resultSec) return;
           if (!q.valid) {
             setResult('○');
             setRemaining(prev => prev - 1);
@@ -84,6 +85,7 @@ const Questions: FC<QuestionsProps> = ({
   questions,
   setRemaining,
   setLife,
+  resultSec,
 }) => {
   const result: JSX.Element[] = [];
   if (started) {
@@ -95,6 +97,7 @@ const Questions: FC<QuestionsProps> = ({
           q={questions[i]} index={i}
           setRemaining={setRemaining}
           setLife={setLife}
+          resultSec={resultSec}
         />
       );
     }

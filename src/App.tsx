@@ -20,6 +20,20 @@ const showLife = (life: number) => {
   }
 }
 
+const showResult = (life: number) => {
+  switch (life) {
+    case 0:
+      return 'ゲームオーバー☠️';
+    case 1:
+    case 2:
+      return 'クリア⭐️';
+    case 3:
+      return 'パーフェクトクリア🎉';
+    default:
+      return 'クリア⭐️';
+  }
+}
+
 function App() {
   const [level, setLevel] = useState("normal" as Level);
   const questions = selectQuestions(level);
@@ -33,14 +47,12 @@ function App() {
   });
   const [remaining, setRemaining] = useState(questions.invalidCount);
   const [life, setLife] = useState(3);
-  if (remaining === 0) {
-    alert(`クリアです！おめでとう🎉\n\nモード：${selectLevelLabel(level)}\nきろく：${passedSec}びょう`);
-    reset();
-  }
-  if (life === 0) {
-    alert(`まちがえすぎ！\nゲームオーバー☠️`);
-    reset();
-  }
+  const [resultSec, setResultSec] = useState(0);
+  useEffect(() => {
+    if ((remaining === 0 || life === 0) && resultSec === 0) {
+      setResultSec(passedSec);
+    }
+  }, [remaining, life, passedSec, resultSec]);
 
   const start = (level: Level) => {
     setLevel(level);
@@ -48,13 +60,15 @@ function App() {
     setRemaining(selectQuestions(level).invalidCount);
     setPassedSec(0);
   };
-
+  const tweetText = `${selectLevelLabel(level)}モードにチャレンジして${resultSec}びょうで${showResult(life)}`;
   return (
     <>
       <div>
         <h2>IPアドレスまちがいさがし</h2>
         <h5>ただしくないIPアドレスをクリックしてやっつけよう！</h5>
-        <h6>なんびょうでクリアできるかな？</h6>
+        {!started ? (
+          <h6>なんびょうでクリアできるかな？</h6>
+        ) : undefined}
         {!started ? (
           <div className="start-btns">
             <div className="start-btn start-btn-easy" onClick={() => start("easy")}>かんたん</div>  
@@ -63,9 +77,19 @@ function App() {
           </div>
         ) : (
           <>
-            <h5>あと{remaining}こ</h5>
-            <h5>きろく：{passedSec}びょう</h5>
+            <h5>{resultSec ? `けっか：${showResult(life)}`: `あと${remaining}こ`}</h5>
+            <h5>きろく：{resultSec ? resultSec : passedSec}びょう</h5>
             <h5>ライフ：{showLife(life)}</h5>
+            {
+              resultSec ? (
+                <div id="twitter-btn">
+                  <a target="_blank" rel="noopener noreferrer"
+                    href={"https://twitter.com/intent/tweet?url=https://kdnakt.github.io/ip-eyegrep"
+                      + `&hashtags=${encodeURIComponent("IPアドレスまちがいさがし")}`
+                      + `&text=${encodeURIComponent(tweetText)}`}>ツイートする</a>
+                </div>
+              ) : undefined
+            }
             <div id="btn" onClick={reset}>さいしょから</div>
           </>
         )}
@@ -77,6 +101,7 @@ function App() {
             questions={questions.questions}
             setRemaining={setRemaining}
             setLife={setLife}
+            resultSec={resultSec}
           />
         </div>
       </div>
@@ -104,6 +129,8 @@ function App() {
             <span>2020/03/17 v1.4.0</span>
             <br />
             <span>ライフをついか</span>
+            <br />
+            <span>ツイートボタンをついか</span>
           </h6>
         )}
       </div>
