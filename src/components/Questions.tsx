@@ -6,6 +6,7 @@ type QuestionsProps = {
   level: Level,
   questions: Target[],
   setRemaining: (func: (n: number) => number) => void,
+  setLife: (func: (n: number) => number) => void,
 };
 
 type QuestionProps = {
@@ -13,10 +14,11 @@ type QuestionProps = {
   level: Level,
   index: number,
   setRemaining: (func: (n: number) => number) => void,
+  setLife: (func: (n: number) => number) => void,
 };
 
 const Question: React.FC<QuestionProps> = ({
-  q, level, index, setRemaining
+  q, level, index, setRemaining, setLife,
 }) => {
   const [result, setResult] = useState('');
   const isHard = "hard" === level;
@@ -34,6 +36,7 @@ const Question: React.FC<QuestionProps> = ({
               setRemaining(prev => prev - 1);
             } else {
               setResult('×');
+              setLife(prev => prev - 1);
             }
           }}
           style={{
@@ -61,6 +64,7 @@ const Question: React.FC<QuestionProps> = ({
             setRemaining(prev => prev - 1);
           } else {
             setResult('×');
+            setLife(prev => prev - 1);
           }
         }}
         style={{
@@ -79,6 +83,7 @@ const Questions: FC<QuestionsProps> = ({
   level,
   questions,
   setRemaining,
+  setLife,
 }) => {
   const result: JSX.Element[] = [];
   if (started) {
@@ -89,6 +94,7 @@ const Questions: FC<QuestionsProps> = ({
           level={level}
           q={questions[i]} index={i}
           setRemaining={setRemaining}
+          setLife={setLife}
         />
       );
     }

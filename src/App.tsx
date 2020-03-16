@@ -7,6 +7,19 @@ const reset = () => {
   document.location.reload()
 }
 
+const showLife = (life: number) => {
+  switch (life) {
+    case 0:
+      return '🤍🤍🤍';
+    case 1:
+      return '❤️🤍🤍';
+    case 2:
+      return '❤️❤️🤍';
+    default:
+      return '❤️❤️❤️';
+  }
+}
+
 function App() {
   const [level, setLevel] = useState("normal" as Level);
   const questions = selectQuestions(level);
@@ -19,8 +32,13 @@ function App() {
     return () => clearInterval(id);
   });
   const [remaining, setRemaining] = useState(questions.invalidCount);
+  const [life, setLife] = useState(3);
   if (remaining === 0) {
     alert(`クリアです！おめでとう🎉\n\nモード：${selectLevelLabel(level)}\nきろく：${passedSec}びょう`);
+    reset();
+  }
+  if (life === 0) {
+    alert(`まちがえすぎ！\nゲームオーバー☠️`);
     reset();
   }
 
@@ -47,6 +65,7 @@ function App() {
           <>
             <h5>あと{remaining}こ</h5>
             <h5>きろく：{passedSec}びょう</h5>
+            <h5>ライフ：{showLife(life)}</h5>
             <div id="btn" onClick={reset}>さいしょから</div>
           </>
         )}
@@ -57,12 +76,13 @@ function App() {
             level={level}
             questions={questions.questions}
             setRemaining={setRemaining}
+            setLife={setLife}
           />
         </div>
       </div>
       <div>
         <h6>
-          <span>v1.3.0</span>
+          <span>v1.4.0</span>
           <a href="https://twitter.com/kdnakt">©︎ kdnakt</a>
         </h6>
         {started ? undefined : (
@@ -80,6 +100,10 @@ function App() {
             <span>2020/03/16 v1.3.0</span>
             <br />
             <span>むずかしいモードをついか</span>
+            <br /><br />
+            <span>2020/03/17 v1.4.0</span>
+            <br />
+            <span>ライフをついか</span>
           </h6>
         )}
       </div>
