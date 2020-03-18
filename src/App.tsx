@@ -34,14 +34,17 @@ const showResult = (life: number) => {
   }
 }
 
+const now = () => new Date().getTime();
+
 function App() {
   const [level, setLevel] = useState("normal" as Level);
   const questions = selectQuestions(level);
   const [started, setStarted] = useState(false);
+  const [startTime, setStartTime] = useState(now());
   const [passedSec, setPassedSec] = useState(0);
   useEffect(() => {
     const id = setInterval(() => {
-      setPassedSec(prev => prev + 1);
+      setPassedSec(Math.floor((now() - startTime) / 1000));
     }, 1000);
     return () => clearInterval(id);
   });
@@ -57,6 +60,7 @@ function App() {
   const start = (level: Level) => {
     setLevel(level);
     setStarted(true);
+    setStartTime(now());
     setRemaining(selectQuestions(level).invalidCount);
     setPassedSec(0);
   };
