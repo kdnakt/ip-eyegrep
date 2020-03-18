@@ -111,7 +111,7 @@ function App() {
       </div>
       <div>
         <h6>
-          <span>v1.4.0</span>
+          <span>v1.4.1</span>
           <a href="https://twitter.com/kdnakt">©︎ kdnakt</a>
         </h6>
         {started ? undefined : (
@@ -135,6 +135,10 @@ function App() {
             <span>ライフをついか</span>
             <br />
             <span>ツイートボタンをついか</span>
+            <br /><br />
+            <span>2020/03/19 v1.4.1</span>
+            <br />
+            <span>バグがなおった🎉</span>
           </h6>
         )}
       </div>
