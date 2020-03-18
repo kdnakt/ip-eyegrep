@@ -26,7 +26,10 @@ const Question: React.FC<QuestionProps> = ({
   if (isHard) {
     return (
       <>
-        <span style={{marginLeft: index % 3 !== 0 ? '4px' : '3%'}}>
+        <span style={{
+          marginLeft: index % 3 !== 0 ? '4px' : '3%',
+          cursor: 'default'
+        }}>
           {result}
         </span>
         <span
@@ -42,6 +45,7 @@ const Question: React.FC<QuestionProps> = ({
           }}
           style={{
             textDecoration: result ? 'line-through' : 'none',
+            cursor: result ? 'default' : 'pointer'
           }}
         >
           {q.ip}
@@ -58,6 +62,7 @@ const Question: React.FC<QuestionProps> = ({
         }}
       >{result}</span>
       <span
+        className={result ? undefined : "target"}
         onClick={() => {
           if (result || resultSec) return;
           if (!q.valid) {

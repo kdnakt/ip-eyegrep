@@ -69,7 +69,7 @@
     text-align: center;
 }
 
-#question span:hover {
+#question .target:hover {
     border: 1px solid orangered;
     cursor: pointer;
 }
